@@ -1,0 +1,6 @@
+{
+  "name": "Scottsdale Pool Club",
+  "description": "Boutique, surgical-grade water engineering and maintenance for Scottsdale's premier residential swimming pools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
