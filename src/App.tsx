@@ -6,12 +6,17 @@ import ServiceReportPreview from './components/ServiceReportPreview';
 import ServicesBento from './components/ServicesBento';
 import ReviewWall from './components/ReviewWall';
 import Footer from './components/Footer';
+import PromiseSection from './components/PromiseSection';
+import CoverageChecker from './components/CoverageChecker';
+import PortalModal from './components/PortalModal';
+import PricingCalculator from './components/PricingCalculator';
 import { Sparkles, X, ChevronRight, Droplet } from 'lucide-react';
 
 export default function App() {
   const formRef = useRef<HTMLDivElement>(null);
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMsg, setNotificationMsg] = useState('');
+  const [showPortal, setShowPortal] = useState(false);
 
   // Handle header CTA click by smoothly scrolling down to the embedded lead form
   const handleScrollToForm = () => {
@@ -99,7 +104,7 @@ export default function App() {
       )}
 
       {/* Navigation Header */}
-      <Header onQuoteClick={handleScrollToForm} />
+      <Header onQuoteClick={handleScrollToForm} onPortalClick={() => setShowPortal(true)} />
 
       {/* Main Content Sections */}
       <main id="main-content-flow" className="flex-1 flex flex-col">
@@ -109,8 +114,17 @@ export default function App() {
         {/* NSPF/Chamber Trust badges */}
         <TrustBadges />
 
+        {/* Triple Protection Named Guarantees */}
+        <PromiseSection />
+
         {/* Custom Service Report Card & Slide-to-Clarity Visualizer */}
         <ServiceReportPreview />
+
+        {/* Hyper-Local Neighborhood Coverage Checker */}
+        <CoverageChecker />
+
+        {/* Transparent Pricing Estimator */}
+        <PricingCalculator />
 
         {/* Boutique Services Catalog */}
         <ServicesBento />
@@ -121,6 +135,9 @@ export default function App() {
 
       {/* Fully Compliant Footer with ROC & Credentials */}
       <Footer />
+
+      {/* Client Portal Overlay Modal */}
+      {showPortal && <PortalModal onClose={() => setShowPortal(false)} />}
     </div>
   );
 }

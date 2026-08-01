@@ -3,9 +3,10 @@ import { useState, useEffect } from 'react';
 
 interface HeaderProps {
   onQuoteClick: () => void;
+  onPortalClick: () => void;
 }
 
-export default function Header({ onQuoteClick }: HeaderProps) {
+export default function Header({ onQuoteClick, onPortalClick }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -73,6 +74,16 @@ export default function Header({ onQuoteClick }: HeaderProps) {
           >
             Review Wall
           </a>
+          <button
+            id="nav-link-portal"
+            onClick={(e) => {
+              e.preventDefault();
+              onPortalClick();
+            }}
+            className="font-sans text-xs tracking-widest text-[#1A2421]/80 hover:text-[#00828A] transition-colors uppercase font-medium cursor-pointer"
+          >
+            Client Portal
+          </button>
         </nav>
 
         {/* Phone & CTA */}
@@ -99,14 +110,17 @@ export default function Header({ onQuoteClick }: HeaderProps) {
           <a
             id="mobile-phone-shortcut"
             href="tel:4805550190"
-            className="flex items-center justify-center size-9 border border-[#1A2421]/15 text-[#1A2421] hover:text-[#00828A]"
+            aria-label="Call Scottsdale Pool Club"
+            className="flex items-center justify-center size-11 border border-[#1A2421]/15 text-[#1A2421] hover:text-[#00828A]"
           >
             <Phone className="size-4" />
           </a>
           <button
             id="mobile-menu-trigger-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-[#1A2421] hover:text-[#00828A] transition-colors"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            className="text-[#1A2421] hover:text-[#00828A] transition-colors size-11 flex items-center justify-center"
           >
             {mobileMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
           </button>
@@ -144,6 +158,16 @@ export default function Header({ onQuoteClick }: HeaderProps) {
             >
               Review Wall
             </a>
+            <button
+              id="mobile-nav-link-portal"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onPortalClick();
+              }}
+              className="font-serif text-2xl tracking-wider text-center text-[#1A2421] hover:text-[#00828A] transition-colors py-2 uppercase cursor-pointer"
+            >
+              Client Portal
+            </button>
           </div>
 
           <div className="mt-auto flex flex-col gap-4 border-t border-[#1A2421]/10 pt-8">

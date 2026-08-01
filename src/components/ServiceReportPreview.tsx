@@ -248,7 +248,7 @@ export default function ServiceReportPreview() {
                     key={rep.id}
                     id={`report-tab-btn-${idx}`}
                     onClick={() => setActiveReportIdx(idx)}
-                    className={`py-3 px-2 font-mono text-[10px] md:text-xs tracking-wider uppercase font-semibold text-center transition-colors cursor-pointer rounded-none ${
+                    className={`py-4 px-2 font-mono text-[10px] md:text-xs tracking-wider uppercase font-semibold text-center transition-colors cursor-pointer rounded-none ${
                       activeReportIdx === idx
                         ? 'bg-[#1A2421] text-[#FAF8F5]'
                         : 'bg-[#FAF8F5] text-[#1A2421]/60 hover:bg-[#ECE7E1]'

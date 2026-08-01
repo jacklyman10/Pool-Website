@@ -107,7 +107,7 @@ export default function Footer() {
           <button
             id="back-to-top-footer-btn"
             onClick={handleScrollTop}
-            className="group flex items-center gap-2 font-sans text-[10px] tracking-widest uppercase font-bold text-[#FAF8F5]/60 hover:text-[#FAF8F5] transition-colors cursor-pointer border border-[#FAF8F5]/10 px-4 py-2"
+            className="group flex items-center gap-2 font-sans text-[10px] tracking-widest uppercase font-bold text-[#FAF8F5]/60 hover:text-[#FAF8F5] transition-colors cursor-pointer border border-[#FAF8F5]/10 px-4 py-3"
           >
             Back to Top
             <ArrowUp className="size-3 text-[#00828A] group-hover:-translate-y-0.5 transition-transform" />

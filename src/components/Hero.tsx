@@ -117,7 +117,7 @@ export default function Hero({ formRef }: HeroProps) {
               className="flex items-center justify-center gap-3 bg-transparent hover:bg-[#FAF8F5]/10 border-2 border-[#FAF8F5] text-[#FAF8F5] font-mono text-sm tracking-wider font-semibold py-4 px-6 transition-all duration-300 rounded-none uppercase"
             >
               <Phone className="size-4 text-[#00828A]" />
-              (480) 555-0190
+              Call or Text: (480) 555-0190
             </a>
             <a
               id="hero-scroll-trigger"
@@ -163,10 +163,11 @@ export default function Hero({ formRef }: HeroProps) {
                         id="name"
                         name="name"
                         required
+                        autoComplete="name"
                         value={formData.name}
                         onChange={handleInputChange}
                         placeholder="E.g., Sterling Troon"
-                        className="bg-transparent border border-[#1A2421]/15 px-3 py-3 font-sans text-sm focus:outline-none focus:border-[#00828A] text-[#1A2421] rounded-none placeholder:text-[#1A2421]/30 w-full"
+                        className="bg-transparent border border-[#1A2421]/15 px-3 py-3 font-sans text-sm focus:outline-none focus:border-[#00828A] text-[#1A2421] rounded-none placeholder:text-[#1A2421]/55 w-full"
                       />
                     </div>
 
@@ -181,10 +182,11 @@ export default function Hero({ formRef }: HeroProps) {
                           id="phone"
                           name="phone"
                           required
+                          autoComplete="tel"
                           value={formData.phone}
                           onChange={handleInputChange}
                           placeholder="(480) 555-0100"
-                          className="bg-transparent border border-[#1A2421]/15 px-3 py-3 font-sans text-sm focus:outline-none focus:border-[#00828A] text-[#1A2421] rounded-none placeholder:text-[#1A2421]/30 w-full"
+                          className="bg-transparent border border-[#1A2421]/15 px-3 py-3 font-sans text-sm focus:outline-none focus:border-[#00828A] text-[#1A2421] rounded-none placeholder:text-[#1A2421]/55 w-full"
                         />
                       </div>
                       <div className="flex flex-col text-left">
@@ -196,10 +198,11 @@ export default function Hero({ formRef }: HeroProps) {
                           id="email"
                           name="email"
                           required
+                          autoComplete="email"
                           value={formData.email}
                           onChange={handleInputChange}
                           placeholder="sterling@example.com"
-                          className="bg-transparent border border-[#1A2421]/15 px-3 py-3 font-sans text-sm focus:outline-none focus:border-[#00828A] text-[#1A2421] rounded-none placeholder:text-[#1A2421]/30 w-full"
+                          className="bg-transparent border border-[#1A2421]/15 px-3 py-3 font-sans text-sm focus:outline-none focus:border-[#00828A] text-[#1A2421] rounded-none placeholder:text-[#1A2421]/55 w-full"
                         />
                       </div>
                     </div>
@@ -216,10 +219,11 @@ export default function Hero({ formRef }: HeroProps) {
                           name="zipCode"
                           required
                           maxLength={5}
+                          autoComplete="postal-code"
                           value={formData.zipCode}
                           onChange={handleInputChange}
                           placeholder="E.g., 85255"
-                          className="bg-transparent border border-[#1A2421]/15 px-3 py-3 font-sans text-sm focus:outline-none focus:border-[#00828A] text-[#1A2421] rounded-none placeholder:text-[#1A2421]/30 w-full"
+                          className="bg-transparent border border-[#1A2421]/15 px-3 py-3 font-sans text-sm focus:outline-none focus:border-[#00828A] text-[#1A2421] rounded-none placeholder:text-[#1A2421]/55 w-full"
                         />
                       </div>
                       <div className="flex flex-col text-left">
@@ -257,6 +261,18 @@ export default function Hero({ formRef }: HeroProps) {
                         'Request Free Valuation'
                       )}
                     </button>
+                    
+                    {/* Guarantee Assurances */}
+                    <div className="flex flex-col gap-1.5 pt-2 text-left text-[11px] font-sans text-[#1A2421]/80">
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle className="size-3 text-[#00828A]" />
+                        <span><strong>No Long-Term Contracts</strong> — Cancel or pause anytime</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle className="size-3 text-[#00828A]" />
+                        <span><strong>All Chemicals Included</strong> — Zero surprise chemical bills</span>
+                      </div>
+                    </div>
                   </form>
 
                   <div className="flex items-center justify-center gap-6 pt-4 border-t border-[#1A2421]/10 text-[#1A2421]/60">
@@ -324,7 +340,7 @@ export default function Hero({ formRef }: HeroProps) {
                         message: ''
                       });
                     }}
-                    className="text-[#1A2421]/60 hover:text-[#00828A] font-sans text-[10px] tracking-widest uppercase font-bold underline"
+                    className="text-[#1A2421]/60 hover:text-[#00828A] font-sans text-[10px] tracking-widest uppercase font-bold underline py-3 block w-full text-center"
                   >
                     Submit Another Inquiry
                   </button>
