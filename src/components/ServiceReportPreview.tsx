@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Calendar, User, Check, AlertCircle, RefreshCw, BarChart2, Eye, ShieldCheck, Flame, Gauge } from 'lucide-react';
 import { ServiceReport, PoolMetrics } from '../types';
@@ -97,30 +97,7 @@ export default function ServiceReportPreview() {
   const [activeReportIdx, setActiveReportIdx] = useState(0);
   const activeReport = reports[activeReportIdx];
 
-  // Interactive Before/After Slider States
-  const [sliderPosition, setSliderPosition] = useState(50);
-  const [isDragging, setIsSubmitting] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSliderPosition(Number(e.target.value));
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const touchX = e.touches[0].clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (touchX / rect.width) * 100));
-    setSliderPosition(percentage);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (e.buttons !== 1 || !containerRef.current) return; // Only trigger on mouse drag click
-    const rect = containerRef.current.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (mouseX / rect.width) * 100));
-    setSliderPosition(percentage);
-  };
 
   // Safe chemical ranges
   const isPhSafe = activeReport.metrics.ph >= 7.2 && activeReport.metrics.ph <= 7.6;
@@ -145,97 +122,9 @@ export default function ServiceReportPreview() {
         </div>
 
         {/* Dynamic Viewer Container */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-          
-          {/* Left Column: Interactive Before/After Visualizer (Col Span 5) */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
-            <div className="text-left space-y-2">
-              <span className="font-mono text-[10px] tracking-widest text-[#FAF8F5] bg-[#1A2421] px-3 py-1 uppercase inline-block font-semibold">
-                Interactive Slider
-              </span>
-              <h3 className="font-serif text-xl font-black text-[#1A2421] uppercase tracking-tight">
-                "I Want My Pool to Look Like That."
-              </h3>
-              <p className="font-sans text-xs text-[#1A2421]/70 leading-relaxed">
-                Drag the slider center bar to inspect the transformation of a Scottsdale backyard pool. 
-                Left reveals the green, untreated neglect; right reveals our trademark <strong className="font-semibold text-[#00828A]">Turquoise Blue Gloss</strong>.
-              </p>
-            </div>
-
-            {/* Slider container */}
-            <div
-              ref={containerRef}
-              onTouchMove={handleTouchMove}
-              onMouseMove={handleMouseMove}
-              className="relative w-full h-[320px] md:h-[400px] border border-[#1A2421]/20 overflow-hidden cursor-ew-resize select-none bg-[#0D1512]"
-            >
-              {/* After: Pristine Shimmer Pool Image */}
-              <img
-                src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
-                alt="After: Pristine balanced pool"
-                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-              />
-              
-              <div className="absolute right-4 bottom-4 bg-[#1A2421]/80 text-[#FAF8F5] text-[10px] tracking-widest font-mono uppercase px-3 py-1 font-semibold backdrop-blur-sm z-20">
-                After Club Care
-              </div>
-
-              {/* Before: Green Murky Pool (using absolute clipping path and CSS filter manipulation) */}
-              <div
-                className="absolute inset-y-0 left-0 overflow-hidden transition-all pointer-events-none"
-                style={{ width: `${sliderPosition}%` }}
-              >
-                <div className="absolute inset-y-0 left-0 h-full w-[100vw] max-w-5xl">
-                  <img
-                    src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
-                    alt="Before: Neglected pool"
-                    className="absolute inset-y-0 left-0 w-full h-full object-cover pointer-events-none filter hue-rotate-[110deg] saturate-[180%] brightness-75 contrast-125"
-                  />
-                </div>
-                
-                <div className="absolute left-4 bottom-4 bg-red-950/80 text-[#FAF8F5] text-[10px] tracking-widest font-mono uppercase px-3 py-1 font-semibold backdrop-blur-sm z-20">
-                  Before: Green Neglect
-                </div>
-              </div>
-
-              {/* The slider controller bar */}
-              <div
-                className="absolute inset-y-0 w-1 bg-white shadow-xl pointer-events-none z-30"
-                style={{ left: `${sliderPosition}%` }}
-              >
-                <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 size-8 bg-white border border-[#1A2421]/20 shadow-lg flex items-center justify-center pointer-events-none rounded-none">
-                  <div className="flex gap-1">
-                    <div className="w-0.5 h-3 bg-[#1A2421]/40" />
-                    <div className="w-0.5 h-3 bg-[#1A2421]/40" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Native invisible range input to allow fully keyboard/mouse controls easily */}
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={sliderPosition}
-                onChange={handleSliderChange}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30"
-              />
-            </div>
-
-            {/* Quick action info */}
-            <div className="p-4 border border-[#1A2421]/10 bg-white space-y-2 text-left">
-              <span className="font-sans text-[10px] tracking-widest text-[#00828A] font-bold uppercase block">
-                // Chemical Chemistry Fact
-              </span>
-              <p className="font-sans text-[11px] text-[#1A2421]/70 leading-relaxed">
-                Neglected pools develop <span className="font-semibold text-amber-700">alkaline scaling</span> and copper oxidation in hours. 
-                Our team tests and re-balances water parameters, resetting mineral saturation indexes to prolong quartz and travertine surfaces.
-              </p>
-            </div>
-          </div>
-
-          {/* Right Column: The Digital Report Card (Col Span 7) */}
-          <div className="lg:col-span-7 bg-white border border-[#1A2421]/15 p-6 md:p-8 flex flex-col justify-between text-left space-y-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Right Column: The Digital Report Card (Full Width) */}
+          <div className="bg-white border border-[#1A2421]/15 p-6 md:p-8 flex flex-col justify-between text-left space-y-8">
             
             {/* History Date Toggles */}
             <div className="space-y-3">
