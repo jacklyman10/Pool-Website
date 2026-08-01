@@ -63,7 +63,8 @@ export default function App() {
           setShowNotification(true);
         }
       }
-    }, 1000);
+    }, 3000);
+
 
     return () => {
       window.removeEventListener('storage', handleStorageChange);
